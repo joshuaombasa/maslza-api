@@ -25,64 +25,11 @@ mongoose.connect(MONGO_URL)
 const equipmentSchema = require("./models/equipment")
 const Equipment = mongoose.model("Equipment", equipmentSchema)
 
-app.get('/api/equipment', async (req, res) => {
-    try {
-        const equipment = await Equipment.find()
-        res.status(200).json(equipment)
-    } catch (error) {
-        res.status(400).json(error)
-    }
-})
 
-app.get('/api/addEquipment', async (req, res) => {
-    const newEquipment = new Equipment({
-        type: "grader",
-        price: "5000",
-        name: "Bush Master",
-        imageUrl: "",
-        status: "working"
-    })
+const equipmemtRoutes = require("./routes/equipment")
 
-    try {
-        await newEquipment.save()
-        res.status(200).json(newEquipment)
-    } catch (error) {
-        res.status(400).json(error)
-    }
-})
+app.use('/api/equipment', equipmemtRoutes)
 
-app.get('/api/equipemt/:id', (req, res) => {
-    const id = req.params.id
-    Equipment.findById(id)
-        .then(equipment => {
-            res.status(200).json(equipment)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
-
-app.put('/api/equipment/:id', (req,res) => {
-    const id = req.params.id
-    Equipment.findByIdAndUpdate(id, {status: "working"})
-        .then(equipment => {
-            res.status(200).json(equipment)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
-
-app.delete('/api/equipment/:id', (req,res) => {
-    const id = req.params.id
-    Equipment.findByIdAndDelete(id, {status: "working"})
-        .then(equipment => {
-            res.status(200).json(equipment)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
