@@ -1,14 +1,5 @@
 const express = require("express")
 const mongoose = require("mongoose")
-// const MONGO_URL = `mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1`
-
-// mongoose.connect(MONGO_URL)
-//     .then(() => {
-//         console.log(`Connected to MongoDB database`)
-//     })
-//     .catch(error => {
-//         console.log(error)
-//     })
 
 const equipmentSchema = require("../models/equipment")
 const Equipment = mongoose.model("Equipment", equipmentSchema)
