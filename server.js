@@ -7,9 +7,6 @@ const MONGO_URL = `mongodb://127.0.0.1:27017/?directConnection=true&serverSelect
 
 const PORT = 4001
 
-const equipment = {}
-
-
 const app = express()
 
 app.use(cors())
@@ -22,13 +19,12 @@ mongoose.connect(MONGO_URL)
         console.log(error)
     })
 
-const equipmentSchema = require("./models/equipment")
-const Equipment = mongoose.model("Equipment", equipmentSchema)
-
 
 const equipmemtRoutes = require("./routes/equipment")
+const vendorRoutes = require("./routes/vendors")
 
 app.use('/api/equipment', equipmemtRoutes)
+app.use('/api/vendors', vendorRoutes)
 
 
 app.listen(PORT, () => {
