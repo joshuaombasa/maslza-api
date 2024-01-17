@@ -1,15 +1,7 @@
 const mongoose = require("mongoose")
 const express = require("express")
 const vendorSchema = require("../models/vendor")
-// const MONGO_URL = `mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1`
 
-// mongoose.connect(MONGO_URL)
-//     .then(() => {
-//         console.log('Connected Successfully to MongoDB')
-//     })
-//     .catch(error => {
-//         console.log(error)
-//     })
 
 const Vendor = mongoose.model("Vendor", vendorSchema)
 
