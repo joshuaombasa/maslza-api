@@ -15,15 +15,10 @@ exports.getAllVendors = (req, res) => {
 }
 
 
-exports.createVendor = (req, res) => {
-    const newVendor = new Vendor({
-        firstName: "Joshua",
-        lastName: "Ombasa",
-        isActive: false,
-        products: ["Truck", "Tesla Model X"],
-        imageUrl: "joshua.jpg"
-    })
-    newVendor.save()
+exports.getOneVendor = (req, res) => {
+    const id = req.params.id
+
+    Vendor.findOne({ _id: id })
         .then((vendor) => {
             res.status(200).json(vendor)
         })
@@ -33,10 +28,16 @@ exports.createVendor = (req, res) => {
 }
 
 
-exports.getOneVendor = (req, res) => {
-    const id = req.params.id
 
-    Vendor.findOne({ _id: id })
+exports.createVendor = (req, res) => {
+    const newVendor = new Vendor({
+        firstName: "Joshua",
+        lastName: "Ombasa",
+        isActive: false,
+        products: ["Truck", "Tesla Model X"],
+        imageUrl: "joshua.jpg"
+    })
+    newVendor.save()
         .then((vendor) => {
             res.status(200).json(vendor)
         })
