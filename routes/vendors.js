@@ -1,8 +1,6 @@
 const mongoose = require("mongoose")
 const express = require("express")
 const vendorSchema = require("../models/vendor")
-
-
 const Vendor = mongoose.model("Vendor", vendorSchema)
 
 const router = express.Router()
