@@ -1,83 +1,20 @@
-const mongoose = require("mongoose")
 const express = require("express")
-const vendorSchema = require("../models/vendor")
-const Vendor = mongoose.model("Vendor", vendorSchema)
+
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    Vendor.find({})
-        .then((vendors) => {
-            res.status(200).json(vendors)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
+const vendorCtrl = require("../controllers/vendors")
 
-router.get('/', (req, res) => {
-    Vendor.find({})
-        .then((vendors) => {
-            res.status(200).json(vendors)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id
+router.get('/', vendorCtrl.getAllVendors)
 
-    Vendor.findOne({ _id: id })
-        .then((vendor) => {
-            res.status(200).json(vendor)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
+router.get('/:id', vendorCtrl.getOneVendor)
 
-router.post('/', (req, res) => {
-    const newVendor = new Vendor({
-        firstName: "Joshua",
-        lastName: "Ombasa",
-        isActive: false,
-        products: ["Truck", "Tesla Model X"],
-        imageUrl: "joshua.jpg"
-    })
-    newVendor.save()
-        .then((vendor) => {
-            res.status(200).json(vendor)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
+router.post('/', vendorCtrl.createVendor)
 
-router.put('/:id', (req, res) => {
-    const id = req.params.id
-    Vendor.findByIdAndUpdate(id, {
-        isActive: true
-    }).then((vendor) => {
-        res.status(200).json(vendor)
-    })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-})
+router.put('/:id', vendorCtrl.modifyVendor)
 
-router.delete('/:id', (req, res) => {
-    const id = req.params.id
-
-    Vendor.findByIdAndDelete(id)
-        .then(() => {
-            res.status(200).json({ message: "Vendor deleted successfully" })
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
-
-})
+router.delete('/:id', vendorCtrl.removeVendor)
 
 module.exports = router
 
