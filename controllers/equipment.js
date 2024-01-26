@@ -5,6 +5,7 @@ const Equipment = mongoose.model("Equipment", equipmentSchema)
 
 
 exports.getAllEquipment = async (req, res) => {
+    
     try {
         const equipment = await Equipment.find()
         res.status(200).json(equipment)
