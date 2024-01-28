@@ -22,9 +22,11 @@ mongoose.connect(MONGO_URL)
 
 const equipmemtRoutes = require("./routes/equipment")
 const vendorRoutes = require("./routes/vendors")
+const loginRoutes = require("./routes/login")
 
 app.use('/api/equipment', equipmemtRoutes)
 app.use('/api/vendors', vendorRoutes)
+app.use('/api/login', loginRoutes)
 
 
 app.listen(PORT, () => {
