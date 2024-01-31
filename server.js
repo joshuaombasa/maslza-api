@@ -10,6 +10,7 @@ const PORT = 4001
 const app = express()
 
 app.use(cors())
+app.use(express.json())
 
 mongoose.connect(MONGO_URL)
     .then(() => {
